@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Fechas de Siembra</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Siembraverano</th>
+                <td>{{ entity.siembraVerano|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Despachoverano</th>
+                <td>{{ entity.despachoVerano|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Siembraotoño</th>
+                <td>{{ entity.siembraOtonio|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Despachootoño</th>
+                <td>{{ entity.despachoOtonio|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Siembrainvierno</th>
+                <td>{{ entity.siembraInvierno|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Despachoinvierno</th>
+                <td>{{ entity.despachoInvierno|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Siembraprimavera</th>
+                <td>{{ entity.siembraPrimavera|date('d/m/Y') }}</td>
+            </tr>
+            <tr>
+                <th>Despachoprimavera</th>
+                <td>{{ entity.despachoPrimavera|date('d/m/Y') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+            <li>
+                <a href="{{ path('fechasiembra') }}">
+                    Volver
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('fechasiembra_edit', { 'id': entity.id }) }}">
+                    Editar
+                </a>
+            </li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+{% endblock %}

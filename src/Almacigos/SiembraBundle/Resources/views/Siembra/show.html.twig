@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Siembra</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Siembra</th>
+                <td>{{ entity.siembra }}</td>
+            </tr>
+            <tr>
+                <th>Dias</th>
+                <td>{{ entity.dias }}</td>
+            </tr>
+            <tr>
+                <th>Cantidad de bandejas</th>
+                <td>{{ entity.cantidadBandejas|number_format(0, '.', '.') }}</td>
+            </tr>
+            <tr>
+                <th>Cantidad a sembrar</th>
+                <td>{{ entity.cantidadSembrar|number_format(0, '.', '.') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('siembra') }}">
+            Volver al listado
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('siembra_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

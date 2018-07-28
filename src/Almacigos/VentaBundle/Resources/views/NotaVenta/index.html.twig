@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Listado de Notas de Ventas</h1>
+
+    <table class="records_list table">
+        <thead>
+            <tr>
+                
+                <th>Numero</th>
+                <th>Notas</th>
+                <th>Datos de spacho</th>
+                <th>Fecha abono</th>
+                <th>Abono</th>
+                <th>Fecha emision</th>
+                <th>Neto</th>
+                <th>Iva</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                
+                <td>{{ entity.numero }}</td>
+                <td>{{ entity.notas }}</td>
+                <td>{{ entity.datosDespacho }}</td>
+                <td>{% if entity.fechaAbono %}{{ entity.fechaAbono|date('d/m/Y') }}{% endif %}</td>
+                <td>${{ entity.abono|number_format(0, '.', '.') }}</td>
+                <td>{% if entity.fechaEmision %}{{ entity.fechaEmision|date('d/m/Y') }}{% endif %}</td>
+                <td>${{ entity.neto|number_format(0, '.', '.') }}</td>
+                <td>${{ entity.iva|number_format(0, '.', '.') }}</td>
+                <td>${{ entity.total|number_format(0, '.', '.') }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('notaventa_show', { 'id': entity.id }) }}">Ver</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('notaventa_edit', { 'id': entity.id }) }}">Editar</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('notaventa_new') }}">
+                Nueva Nota de Venta
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

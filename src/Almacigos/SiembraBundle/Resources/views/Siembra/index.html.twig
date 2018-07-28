@@ -1,0 +1,58 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="row">
+    <h1>Listado de Siembras</h1>
+
+    <table class="records_list table">
+        <thead>
+            <tr>
+                <th>Nv</th>
+                <th>Pedido</th>                
+                <th>Siembra</th>
+                <th>F siembra NV</th>
+                <th>Agricultor</th>
+                <th>Cliente</th>
+                <th>Especie</th>
+                <th>F desp. NV</th>
+                <th>Cant. Dias</th>
+                <th>Plantas NV</th>
+                <th>Tipo bandeja</th>
+                <th>Cantidad bandejas</th>
+                <th>Cantidad a sembrar</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.pedido.notaVenta.numero }}</td>
+                <td>{{ entity.pedido.id }}</td>
+                <td>{{ entity.siembra }}</td>
+                <td>CALCULAR FECHA SIEMBRA</td>
+                <td>Agricultor</td>
+                <td>{{ entity.pedido.notaVenta.Cliente.nombre }}</td>
+                <td>{{ entity.pedido.producto.especie }}</td>
+                <td>{{ entity.pedido.fechaDespacho|date('d/m/Y') }}</td>
+                <td>{{ entity.dias }}</td>
+                <td>{{ entity.pedido.cantidadSolicitada|number_format(0, '.', '.') }}</td>
+                <td>{{ entity.bandeja.tipo }}</td>
+                <td>{{ entity.cantidadBandejas|number_format(0, '.', '.') }}</td>
+                <td>{{ entity.cantidadSembrar|number_format(0, '.', '.') }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('siembra_show', { 'id': entity.id }) }}">Ver</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('siembra_edit', { 'id': entity.id }) }}">Editar</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    
+{% endblock %}

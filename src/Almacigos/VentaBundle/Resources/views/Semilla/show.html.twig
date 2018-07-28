@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Semilla</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Producto</th>
+                <td>{{ entity.producto }}</td>
+            </tr>
+            <tr>
+                <th>Codigo</th>
+                <td>{{ entity.codigo }}</td>
+            </tr>
+            <tr>
+                <th>Cantidad</th>
+                <td>{{ entity.cantidad|number_format(0, '.', '.') }}</td>
+            </tr>
+            <tr>
+                <th>Germinacion estimada</th>
+                <td>{{ entity.germinacionEstimada }}%</td>
+            </tr>
+            <tr>
+                <th>Valor semilla</th>
+                <td>${{ entity.valorSemilla|number_format(0, '.', '.') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('semilla') }}">
+            Volver al listado
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('semilla_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

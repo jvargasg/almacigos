@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Producto</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Especie</th>
+                <td>{{ entity.especie }}</td>
+            </tr>
+            <tr>
+                <th>Variedad</th>
+                <td>{{ entity.variedad }}</td>
+            </tr>
+            <tr>
+                <th>Precioneto</th>
+                <td>${{ entity.precioNeto|number_format(0, '.', '.') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('producto') }}">
+            Volver al listado
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('producto_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

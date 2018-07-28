@@ -1,0 +1,330 @@
+<?php
+
+namespace Almacigos\VentaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Cliente
+ *
+ * @ORM\Table(name="cliente")
+ * @ORM\Entity
+ */
+class Cliente
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=500)
+     */
+    private $nombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rut", type="string", length=13)
+     */
+    private $rut;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="string", length=500)
+     */
+    private $direccion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=20)
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="celular", type="string", length=20)
+     */
+    private $celular;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=500)
+     */
+    private $email;
+
+    /**
+     * @ORM\OneToMany(targetEntity="NotaVenta", mappedBy="cliente", cascade={"persist", "remove"})
+     * @Assert\Valid()
+     */
+    private $notaVenta;
+
+    /**
+     * @ORM\OneToOne(targetEntity="CondicionVenta", inversedBy="cliente")
+     * @ORM\JoinColumn(name="condicionventa_id", referencedColumnName="id")
+     */
+    private $condicionVenta;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Cliente
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set rut
+     *
+     * @param string $rut
+     * @return Cliente
+     */
+    public function setRut($rut)
+    {
+        $this->rut = $rut;
+
+        return $this;
+    }
+
+    /**
+     * Get rut
+     *
+     * @return string 
+     */
+    public function getRut()
+    {
+        return $this->rut;
+    }
+
+    /**
+     * Set direccion
+     *
+     * @param string $direccion
+     * @return Cliente
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+
+        return $this;
+    }
+
+    /**
+     * Get direccion
+     *
+     * @return string 
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * Set telefono
+     *
+     * @param string $telefono
+     * @return Cliente
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return string 
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
+     * Set celular
+     *
+     * @param string $celular
+     * @return Cliente
+     */
+    public function setCelular($celular)
+    {
+        $this->celular = $celular;
+
+        return $this;
+    }
+
+    /**
+     * Get celular
+     *
+     * @return string 
+     */
+    public function getCelular()
+    {
+        return $this->celular;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Cliente
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set condicionVenta
+     *
+     * @param \Almacigos\VentaBundle\Entity\CondicionVenta $condicionVenta
+     * @return Cliente
+     */
+    public function setCondicionVenta(\Almacigos\VentaBundle\Entity\CondicionVenta $condicionVenta = null)
+    {
+        $this->condicionVenta = $condicionVenta;
+
+        return $this;
+    }
+
+    /**
+     * Get condicionVenta
+     *
+     * @return \Almacigos\VentaBundle\Entity\CondicionVenta 
+     */
+    public function getCondicionVenta()
+    {
+        return $this->condicionVenta;
+    }
+    
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->notaVentas = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add notaVentas
+     *
+     * @param \Almacigos\VentaBundle\Entity\NotaVenta $notaVentas
+     * @return Cliente
+     */
+    public function addNotaVenta(\Almacigos\VentaBundle\Entity\NotaVenta $notaVentas)
+    {
+        $this->notaVentas[] = $notaVentas;
+
+        return $this;
+    }
+
+    /**
+     * Remove notaVentas
+     *
+     * @param \Almacigos\VentaBundle\Entity\NotaVenta $notaVentas
+     */
+    public function removeNotaVenta(\Almacigos\VentaBundle\Entity\NotaVenta $notaVentas)
+    {
+        $this->notaVentas->removeElement($notaVentas);
+    }
+
+    /**
+     * Get notaVentas
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotaVentas()
+    {
+        return $this->notaVentas;
+    }
+
+    public function __toString()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Add notaVenta
+     *
+     * @param \Almacigos\VentaBundle\Entity\NotaVenta $notaVenta
+     * @return Cliente
+     */
+    public function addNotaVentum(\Almacigos\VentaBundle\Entity\NotaVenta $notaVenta)
+    {
+        $this->notaVenta[] = $notaVenta;
+
+        return $this;
+    }
+
+    /**
+     * Remove notaVenta
+     *
+     * @param \Almacigos\VentaBundle\Entity\NotaVenta $notaVenta
+     */
+    public function removeNotaVentum(\Almacigos\VentaBundle\Entity\NotaVenta $notaVenta)
+    {
+        $this->notaVenta->removeElement($notaVenta);
+    }
+
+    /**
+     * Get notaVenta
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getNotaVenta()
+    {
+        return $this->notaVenta;
+    }
+}

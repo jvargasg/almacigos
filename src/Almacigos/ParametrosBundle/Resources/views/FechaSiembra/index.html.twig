@@ -1,0 +1,93 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Fechas de inicio de temporadas</h1>
+    
+    <TABLE class="records_list table table-bordered">
+        
+    <TR>
+        <TH rowspan="2">
+            <TH colspan="4">Fechas de inicio temporadas</th>
+            <TR>
+                <TH>Verano</th>
+                <TH>Otoño</th>
+                <th>Invierno</th>
+                <th>Primavera</th>
+            </tr>
+
+            <TR>
+                <TH>Siembra
+                    <TD>{% if entity.siembraVerano %}{{ entity.siembraVerano|date('d/m/Y') }}{% endif %}</td>
+                    <TD>{% if entity.siembraOtonio %}{{ entity.siembraOtonio|date('d/m/Y') }}{% endif %}</td>
+                    <td>{% if entity.siembraInvierno %}{{ entity.siembraInvierno|date('d/m/Y') }}{% endif %}</td>
+                    <td>{% if entity.siembraPrimavera %}{{ entity.siembraPrimavera|date('d/m/Y') }}{% endif %}</td>
+                </th>
+            </tr>
+            <TR>
+                <TH>Despacho
+                    <td>{% if entity.despachoVerano %}{{ entity.despachoVerano|date('d/m/Y') }}{% endif %}</td>
+                    <td>{% if entity.despachoOtonio %}{{ entity.despachoOtonio|date('d/m/Y') }}{% endif %}</td>
+                    <td>{% if entity.despachoInvierno %}{{ entity.despachoInvierno|date('d/m/Y') }}{% endif %}</td>
+                    <td>{% if entity.despachoPrimavera %}{{ entity.despachoPrimavera|date('d/m/Y') }}{% endif %}</td>
+                </th>
+            </tr>
+
+        </th>
+    </TABLE>
+
+    {#<table class="records_list table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Siembraverano</th>
+                <th>Despachoverano</th>
+                <th>Siembraotonio</th>
+                <th>Despachootonio</th>
+                <th>Siembrainvierno</th>
+                <th>Despachoinvierno</th>
+                <th>Siembraprimavera</th>
+                <th>Despachoprimavera</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('fechasiembra_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.siembraVerano %}{{ entity.siembraVerano|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.despachoVerano %}{{ entity.despachoVerano|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.siembraOtonio %}{{ entity.siembraOtonio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.despachoOtonio %}{{ entity.despachoOtonio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.siembraInvierno %}{{ entity.siembraInvierno|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.despachoInvierno %}{{ entity.despachoInvierno|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.siembraPrimavera %}{{ entity.siembraPrimavera|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.despachoPrimavera %}{{ entity.despachoPrimavera|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('fechasiembra_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('fechasiembra_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>#}
+
+        <ul>
+            <li>
+                {% if not entity.hay_registros %}
+                    <a href="{{ path('fechasiembra_new') }}">
+                        Establecer fechas
+                    </a>
+                {% else %}
+                    <a href="{{ path('fechasiembra_edit', { 'id': entity.id }) }}">
+                        Editar fechas
+                    </a>
+                {% endif %}
+            </li>
+        </ul>
+    {% endblock %}

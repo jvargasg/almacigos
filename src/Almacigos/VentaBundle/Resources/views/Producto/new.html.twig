@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Nuevo Producto</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions table">
+    <li>
+        <a href="{{ path('producto') }}">
+            Volver al listado
+        </a>
+    </li>
+</ul>
+{% endblock %}

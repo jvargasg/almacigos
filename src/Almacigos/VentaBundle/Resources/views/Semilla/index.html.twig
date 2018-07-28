@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Stock de Semillas</h1>
+
+    <table class="records_list table">
+        <thead>
+            <tr>
+                <th>Codigo</th>                
+                <th>Cantidad</th>
+                <th>Germinacion estimada</th>
+                <th>Valor semilla</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.codigo }}</td>
+                <td>{{ entity.cantidad|number_format(0, '.', '.') }}</td>
+                <td>{{ entity.germinacionEstimada }}%</td>
+                <td>${{ entity.valorSemilla|number_format(0, '.', '.') }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('semilla_show', { 'id': entity.id }) }}">Ver</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('semilla_edit', { 'id': entity.id }) }}">Editar</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('semilla_new') }}">
+                Ingresar nueva semilla
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

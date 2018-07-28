@@ -1,0 +1,23 @@
+parametros:
+    resource: "@ParametrosBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+usuario:
+    resource: "@UsuarioBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+siembra:
+    resource: "@SiembraBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+venta:
+    resource: "@VentaBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: @AppBundle/Controller/
+    type:     annotation

@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<div class="row">
+    <h1>Valor de IVA</h1>
+
+   <div class="col-md-5">IVA: {% if entity.iva is defined %}{{ entity.iva }}%{% endif %}</div>
+</div>
+<div class="row">
+    <ul>
+        <li>
+            {% if not entity.hay_registros %}
+                <a href="{{ path('iva_new') }}">
+                    Establecer IVA
+                </a>
+            {% else %}
+                <a href="{{ path('iva_edit', { 'id': entity.id }) }}">
+                    Editar IVA
+                </a>
+            {% endif %}
+        </li>
+    </ul>
+</div>
+    {% endblock %}

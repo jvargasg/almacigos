@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Lista de Pedidos</h1>
+
+    <table class="records_list table">
+        <thead>
+            <tr>
+                <th>Nota de Venta</th>
+                <th>Cantidad solicitada</th>
+                <th>Neto</th>
+                <th>Total</th>
+                <th>Fecha de despacho</th>
+                <th>Producto</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                {#<td><a href="{{ path('pedido_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
+                <td>{{ entity.notaVenta.numero }}</td>
+                <td>{{ entity.cantidadSolicitada }}</td>
+                <td>${{ entity.neto|number_format(0, '.', '.') }}</td>
+                <td>${{ entity.total|number_format(0, '.', '.') }}</td>
+                <td>{% if entity.fechaDespacho %}{{ entity.fechaDespacho|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ entity.producto }}</td>
+                <td>{{ entity.estado }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('pedido_show', { 'id': entity.id }) }}">Ver</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('siembra_new', {'idPedido': entity.id }) }}">Enviar a siembra</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('pedido_edit', { 'id': entity.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        {#<ul>
+        <li>
+            <a href="{{ path('pedido_new') }}">
+                Ingresar nuevo pedido
+            </a>
+        </li>
+    </ul>#}
+    {% endblock %}

@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Detalles de las Bandejas</h1>
+
+    <table class="record_properties table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Tipo</th>
+                <td>{{ entity.tipo }}</td>
+            </tr>
+            <tr>
+                <th>Cantidad</th>
+                <td>{{ entity.cantidad|number_format(0, '.', '.') }}</td>
+            </tr>
+                     
+        </tbody>
+    </table>
+
+    <h2>Ubicaciones de las bandejas</h2>
+
+    <table class="records_list table">
+        <thead>
+            <tr>                            
+                <th>Ubicación</th>                
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for u in ubicaciones %}
+            <tr>                
+                <td>{{ u.tipoUbicacion }}</td>                
+                <td>{{ u.cantidad|number_format(0, '.', '.') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('bandeja') }}">
+            Volver al listado
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('bandeja_edit', { 'id': entity.id }) }}">
+            Editar
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
